@@ -52,6 +52,12 @@ def get_recommendation_test(request):
     market=params['Market']
     freq=params['Frequency']
     return True
+
+def get_bu_test(request):
+    params=request.get_json()
+    cluster=params['cluster']
+    return True
+    
       
 def get_recommendation(request):
     try:

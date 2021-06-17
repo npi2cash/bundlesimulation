@@ -17,7 +17,7 @@ for failure scenario - return status,msg
 '''
 
 from flask import Flask,request,jsonify
-from apriori import get_recommendation,get_recommendation_test
+from apriori import get_recommendation,get_recommendation_test,get_bu_test
 import pandas as pd
 
 app=Flask(__name__)
@@ -53,6 +53,13 @@ def market_stub():
 def product_stub():
 #     status=get_recommendation_test(request)
     test_dict={"product1":"712033","product2":"712034","product3":"712214", "product4":"712035", "product5":"712202", "product6":"712203"}
+    df_result=pd.DataFrame([test_dict], columns=test_dict.keys())
+    return(jsonify(df_result.to_json(orient='records')))
+
+@app.route('/businessstub',methods=['POST'])
+def business_stub():
+    status=get_bu_test(request)
+    test_dict={"business1":"CT AMI","business2":"IGT Systems","business3":"PDS", "business4":"MR DXR OEM", "business5":"US", "business6":"IGT Devices"}
     df_result=pd.DataFrame([test_dict], columns=test_dict.keys())
     return(jsonify(df_result.to_json(orient='records')))
 
